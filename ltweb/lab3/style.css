@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #e8f7f9 url("images/bg-body.png") no-repeat fixed top;
+}
+a {
+    text-decoration: none;
+    font-size: 85%;
+}
+#wrapper {
+    width: 700px;
+    margin: 0 auto;
+}
+header {
+    background: url("images/bg-header.jpg") no-repeat top;
+    height: 140px;
+}
+header #title {
+    color: #b0aead;
+    font-style: italic;
+    font-size: 30px;
+    padding-top: 50px;
+    padding-left: 35px;
+}
+nav {
+    background: url("images/bg-menu.png") no-repeat top;
+    height: 35px;
+    line-height: 35px;
+    padding: 0px 10px;
+}
+nav li {
+    float: left;
+    list-style: none;
+}
+nav li a {
+    display: block;
+    color: white;
+    padding: 0px 15px;
+}
+nav li a:hover, nav li a:focus {
+    background: url("images/bg-menu-hover.png") no-repeat center;
+}
+section {
+    background-color: white;
+    height: 430px;
+}
+article {
+    float: left;
+    width: 500px;
+}
+article #adtop {
+    background: url("images/bg-ad-top.png") no-repeat;
+    width: 480px;
+    height: 72px;
+}
+#content {
+    padding: 10px;
+}
+#content h1 {
+    color: #c8d15e;
+    padding-top: 20px;
+    font-size: 22px;
+    font-weight: 100;
+}
+#content p {
+    text-align: justify;
+    padding: 10px 0px;
+}
+.date {
+    color: #d9dde1;
+    font-size: 80%;
+    padding: 5px 0px;
+    letter-spacing: 1px;
+}
+.comment {
+    height: 30px;
+}
+.comment a {
+    background: url("images/icon-comment.png") no-repeat left center;
+    color: #00dfdf;
+    padding-left: 20px;
+}
+aside {
+    float: right;
+    background-color: #efefef;
+    width: 180px;
+    margin: 0px 10px;
+}
+aside #feed {
+    background: url("images/bg-feed.gif") no-repeat center center;
+    height: 25px;
+}
+a.fbutton {
+    display: block;
+    width: 100px;
+    height: 25px;
+    margin: 0 auto;
+    background: url("images/button-feed.png") no-repeat top center;
+}
+a:hover.fbutton {
+    background-position: 0 -25px;
+}
+aside ul {
+    margin-top: 15px;
+}
+aside li {
+    list-style: none;
+}
+aside li a {
+    display: block;
+    padding: 2px 5px;
+    color: black;
+    border-bottom:1px solid #dddddd;
+}
+aside #fbottom {
+    background: url("images/bg-sidebar-bottom.gif") no-repeat bottom;
+    height: 20px;
+}
+footer {
+    background: url("images/bg-footer.jpg") no-repeat top;
+    height: 100px;
+}
+footer p {
+    color: white;
+    padding-left: 20px;
+    padding-top: 60px;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find your location</title>
+	<style type="text/css">
+	body {
+		background-image: url("back.jpg");
+		margin: 50px auto;
+		width: -moz-fit-content;
+		width: -webkit-fit-content;
+		width: fit-content;
+	}
+	section {
+		color: white;
+		background-color: rgba(237, 147, 37, 0.65);
+		font-family: tahoma;
+		padding: 15px;
+	}
+	#mapholder {
+		margin-top: 10px;
+	}
+	#mapcanvas {
+		width: 600px;
+		height: 400px;
+	}
+	</style>
+</head>
+<body>
+	<section>
+		<article>
+			<h2>Find your location...</h2>
+			<p><span id="status">(Share location if you want to see the result)</span></p>
+			<button onclick="getLocation()">Try it</button>
+			<div id="mapholder"></div>
+		</article>
+
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		<script type="text/javascript">
+			function getLocation() {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showPosition, write);
+					write("Aloha!");
+				} else {
+					write("Geolocation is not supported by this browser.");
+				}
+			}
+			function showPosition(position) {
+				var mapcanvas = document.getElementById("mapcanvas");
+				if (mapcanvas == null) {
+					mapcanvas = document.createElement('div');
+					mapcanvas.id = 'mapcanvas';
+
+					var mapholder = document.getElementById('mapholder');
+					mapholder.appendChild(mapcanvas);
+				}
+
+				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				var myOptions = {
+					zoom: 15,
+					center: latlng,
+					mapTypeControl: false,
+					navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+				var marker = new google.maps.Marker({
+					position: latlng, 
+					map: map, 
+					title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+				});
+			}
+			function write(msg) {
+				var status = document.getElementById("status");
+				status.innerHTML = typeof msg == "string" ? msg : "Failed";
+			}
+		</script>
+	</section>
+</body>
+</html>

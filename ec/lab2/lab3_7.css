@@ -1,0 +1,46 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	margin: 50px auto;
+	width: 400px;
+	text-align: center;
+}
+
+#box {
+	background-color: #ffffad;
+	width: 400px;
+	height: 400px;
+	position: absolute;
+}
+
+.image {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+}
+
+#show {
+	background: url("cat/grey-cat-001.gif") no-repeat;
+	margin: 160px;
+}
+
+#hidden {
+	background: url("cat/grey-cat-007.gif") no-repeat;
+	margin: 120px;
+	display: none;
+}
+
+#show:hover {
+	background-image: none;
+}
+
+#show:hover #hidden {
+	display: block;
+}
+
+#show:active #hidden {
+	background: url("cat/cat3_small.gif") no-repeat;
+}

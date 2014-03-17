@@ -1,0 +1,30 @@
+body {
+    margin: 10px auto;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+h3 {
+    margin: 20px 0px;
+    text-align: left;
+}
+#form {
+    margin: 20px;
+    float: left;
+}
+#show {
+    margin: 20px;
+    padding: 20px;
+    float: right;
+    border: 1px solid;
+}
+#form input[type=text], #form input[type=file], select {
+    width: 150px;
+}
+#info {
+    line-height: 30px;
+}
+input:invalid {
+    border-color:hsl(0, 50%, 50%);
+    background:hsl(0, 50%, 90%);
+}

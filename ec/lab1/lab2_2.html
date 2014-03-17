@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lab2 - 1</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		background-image: url(back.jpg);
+	}
+	#wrap {
+		width: 750px;
+		margin: 0 auto;
+	}
+	form {
+		background-color: rgba(237, 147, 37, 0.7);
+		color: white;
+		padding: 20px;
+		margin-top: 100px;
+		color: white;
+		font-family: tahoma;
+	}
+	h3 {
+		padding: 20px;
+	}
+	table td {
+		padding: 5px 10px;
+	}
+	.text {
+		width: 250px;
+	}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<form id="reg_form" action="lab2_21.html">
+		<h3>Please fill in the following information</h2>
+		<table>
+			<tr>
+				<td><label for="l_name">Last Name*</label></td>
+				<td>
+					<input type="text" id="l_name" required>
+					<label for="f_name" style="margin-left:100px;margin-right:20px;">First Name*</label>
+					<input type="text" id="f_name" required>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="email">Email*</label></td>
+				<td>
+					<input type="email" id="email" class="text" placeholder="example@abc.com" required>
+					<label for="email">(Each email has only one account)</label>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="d_name">Display Name*</label></td>
+				<td>
+					<input type="text" id="d_name" class="text" pattern="[A-Za-z0-9]{4,10}" required>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<label for="d_name">
+					Only upper/lowercase letters and numbers. 
+					The string must also<br>has a minium of four characters, and a maximum of ten.
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="password">Password*</label></td>
+				<td><input type="password" id="password" class="text" required></td>
+			</tr>
+			<tr>
+				<td><label for="r_password">Re-enter<br>Password*</label></td>
+				<td><input type="password" id="r_password" class="text" required></td>
+			</tr>
+			<tr>
+				<td><label for="sex">Sex</label></td>
+				<td>
+					<input type="radio" name="sex" value="man">Man
+					<input type="radio" name="sex" value="woman">Woman
+				</td>
+			</tr>
+			<tr>
+				<td><label for="b_date">Birthdate</label></td>
+				<td><input type="date" id="b_date"></td>
+			</tr>
+			<tr>
+				<td><label for="f_color">Favorite Color</label></td>
+				<td><input type="color" id="f_color"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Submit"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

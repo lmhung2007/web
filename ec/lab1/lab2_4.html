@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rubik</title>
+	<style type="text/css">
+	body {
+		margin: 50px auto;
+		width: -moz-fit-content;
+		width: -webkit-fit-content;
+		width: fit-content;
+		text-align: center;
+	}
+	#left {
+		float: left;
+		width: 50%;
+	}
+	#right {
+		float: right;
+		width: 50%;
+	}
+	table {
+		margin: 10px;
+	}
+	td {
+		border: groove;
+		width: 100px;
+		height: 105px;
+	}
+	img {
+		width: 100px;
+		height: 100px;
+	}
+	</style>
+	<script>
+		function allowDrop(ev)
+		{
+			if (ev.srcElement.className == "drop") {
+				ev.preventDefault();
+			}
+		}
+
+		function drag(ev)
+		{
+			ev.dataTransfer.setData("Text",ev.target.id);
+		}
+
+		function drop(ev)
+		{
+			if (!ev.target.hasChildNodes()) {
+				ev.preventDefault();
+				var data=ev.dataTransfer.getData("Text");
+				ev.target.appendChild(document.getElementById(data));
+			}
+		}
+	</script>
+</head>
+<body>
+	<section>
+		<h2>Drag and drop the pieces to complete the picture.</h2>
+		<div id="left">
+			<table ondrop="drop(event)" ondragover="allowDrop(event)">
+				<tr><td id="drop1" class="drop"></td><td id="drop2" class="drop"></td><td id="drop3" class="drop"></td></tr>
+				<tr><td id="drop4" class="drop"></td><td id="drop5" class="drop"></td><td id="drop6" class="drop"></td></tr>
+				<tr><td id="drop7" class="drop"></td><td id="drop8" class="drop"></td><td id="drop9" class="drop"></td></tr>
+			</table>
+		</div>
+		<div id="right">
+			<table ondrop="drop(event)" ondragover="allowDrop(event)">
+				<tr>
+					<td class="drop"><img id="drag1" src="img/Rubik1.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag2" src="img/Rubik6.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag3" src="img/Rubik8.jpg" ondragstart="drag(event)"></td>
+				</tr>
+				<tr>
+					<td class="drop"><img id="drag4" src="img/Rubik4.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag5" src="img/Rubik7.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag6" src="img/Rubik2.jpg" ondragstart="drag(event)"></td>
+				</tr>
+				<tr>
+					<td class="drop"><img id="drag7" src="img/Rubik3.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag8" src="img/Rubik5.jpg" ondragstart="drag(event)"></td>
+					<td class="drop"><img id="drag9" src="img/Rubik9.jpg" ondragstart="drag(event)"></td>
+				</tr>
+			</table>	
+		</div>
+	</section>
+</body>
+</html>
