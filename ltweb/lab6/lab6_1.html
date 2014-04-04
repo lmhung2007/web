@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lab6 - 1</title>
+    <style type="text/css">
+        body {
+            margin: 100px auto;
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 0 5px;
+        }
+
+        input[type=text] {
+            width: 80px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script type="text/javascript">
+        function calc(a, b, op) {
+            if (isNaN(a) || (isNaN(b) && op != "1/x"))
+                return "Chưa nhập đủ số";
+            switch (op) {
+                case "+":
+                    return a + b;
+                case "-":
+                    return a - b;
+                case "*":
+                    return a * b;
+                case "/":
+                    return b == 0 ? "Lỗi: chia cho 0" : a / b;
+                case "^":
+                    return Math.pow(a, b);
+                case "1/x":
+                    return a == 0 ? "Lỗi: chia cho 0" : 1 / a;
+                default :
+                    return "Không hỗ trợ phép tính " + op;
+            }
+        }
+        function printResult() {
+            var a = parseInt($(first).val());
+            var b = parseInt($(second).val());
+            var op = $(operator).val();
+            $(result).text(calc(a, b, op));
+        }
+    </script>
+</head>
+
+<body>
+<h2>Simple Calculator</h2>
+<table>
+    <tr>
+        <th>Số thứ nhất</th>
+        <th>Phép tính</th>
+        <th>Số thứ hai</th>
+        <th></th>
+        <th>Kết quả</th>
+    </tr>
+    <tr>
+        <td><input type="text" placeholder="Số thứ nhất" id="first"></td>
+        <td><label>
+            <select id="operator">
+                <script>
+                    var ops = ["+", "-", "*", "/", "^", "1/x"];
+                    for (var i = 0; i < ops.length; ++i) {
+                        document.write('<option value=' + ops[i] + '>' + ops[i] + '</option>');
+                    }
+                </script>
+            </select>
+        </label></td>
+        <td><input type="text" placeholder="Số thứ hai" id="second"></td>
+        <td><input type="button" value="=" onclick="printResult()"></td>
+        <td><p id="result">Test</p></td>
+    </tr>
+</table>
+</body>
+</html>
