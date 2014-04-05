@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab6 - 2</title>
+    <style type="text/css">
+        body {
+            margin: 50px auto;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        form {
+            border: 1px solid #00f;
+            padding: 20px;
+        }
+
+        label {
+            display: inline-block;
+            padding: 5px 0;
+        }
+
+        .w100 {
+            width: 100px;
+        }
+
+        .fit {
+            width: 300px;
+        }
+
+        #error {
+            color: #ff0000;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script type="text/javascript">
+        function fillOptions(from, to, def) {
+            for (var i = from; i <= to; ++i) {
+                if (i == def) {
+                    document.write('<option selected="selected" value="' + i + '"> ' + i + '</option>');
+                } else {
+                    document.write('<option value="' + i + '">' + i + '</option>');
+                }
+            }
+        }
+        function showError(message) {
+            console.log(message);
+            $(error).html(message);
+        }
+        function checkLength(str, min, max) {
+            console.log(str + " " + str.length);
+            return (str.length >= min && str.length <= max);
+        }
+        function validate() {
+            var message = "";
+            var success = true;
+            if (!checkLength($(fname).val(), 2, 30)) {
+                message += "<br>* First name must be 2-30 characters in length.";
+                console.log(message);
+                success = false;
+            }
+            if (!checkLength($(lname).val(), 2, 20)) {
+                message += "<br>* Last name must be 2-20 characters in length.";
+                success = false;
+            }
+            var pattern = /\S+@\S+\.\S+/;
+            if (!pattern.test($(email).val())) {
+                message += "<br>* Invalid email format: must be &lt;sth&gt;@&lt;sth&gt;.&lt;sth&gt;";
+                success = false;
+            }
+            if (!checkLength($(password).val(), 6, 20)) {
+                message += "<br>* Password must be 6-20 characters in length.";
+                success = false;
+            }
+            if (success) {
+                alert("Successful!");
+            } else {
+                showError(message);
+            }
+            return success;
+        }
+    </script>
+</head>
+<body>
+<form method="post" onsubmit="return validate();" novalidate>
+    <h3>Registration Form</h3>
+    <label for="fname" class="w100">First name:</label>
+    <input type="text" id="fname" name="fname" placeholder="First name" class="fit">
+    <br><label for="fname" class="w100">Last name:</label>
+    <input type="text" id="lname" name="lname" placeholder="Last name" class="fit">
+    <br><label for="email" class="w100">Email:</label>
+    <input type="email" id="email" name="email" placeholder="abc@example.com" class="fit">
+    <br><label for="password" class="w100">Password:</label>
+    <input type="password" id="password" name="password" class="fit">
+    <br><label for="birthday" class="w100">Birthday:</label>
+    <span id="birthday">
+        <label for="day">Day </label>
+        <select name="day" id="day">
+            <script>fillOptions(1, 31, 14);</script>
+        </select>
+        <label for="month">Month </label>
+        <select name="month" id="month">
+            <script>fillOptions(1, 12, 10);</script>
+        </select>
+        <label for="year">Year </label>
+        <select name="year" id="year">
+            <script>fillOptions(1970, 2030, 1991);</script>
+        </select>
+    </span>
+    <br><label for="gender" class="w100">Gender:</label>
+    <span id="gender">
+        <input type="radio" name="gender" id="male" value="Male" checked>
+        <label for="male">Male </label>
+        <input type="radio" name="gender" id="female" value="FemaFle">
+        <label for="female">Female </label>
+    </span>
+    <br><label for="about" class="w100">About:</label>
+    <textarea name="about" id="about" class="fit"></textarea>
+    <br><input type="reset" name="reset" value="Reset">
+    <input type="submit" name="submit" value="Submit">
+
+    <div id="error"></div>
+</form>
+</body>
+</html>
