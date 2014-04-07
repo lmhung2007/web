@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lab3_1</title>
+    <title>Lab3_2</title>
     <link rel="stylesheet" type="text/css" href="lab3_1.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -10,31 +10,36 @@
         var students = ["1 semester", "1 year"];
         var others = ["1 year", "2 years"];
         function changeJob() {
-            var jobName = $(job).val();
-            $(pay).empty();
+            var jobName = $("#job").val();
+            $("#pay").empty();
             var arr = (jobName == STUDENT ? students : others);
             $.each(arr, function (value, key) {
-                $(pay).append($("<option/>", {
+                $("#pay").append($("<option/>", {
                     value: key,
                     text: key
                 }));
             });
         }
-        function showInfo() {
-            var s = "Name: " + $("#fname").val() + " " + $("#lname").val();
-            s += "<br>Email: " + $("#email").val();
-            s += "<br>Address: " + $("#address").val();
-            s += "<br>Sex: " + $('input[name="sex"]:checked').val();
-            s += "<br>Birth date: " + $("#bdate").val();
-            s += "<br>Job: " + $("#job").find("option:selected").text();
-            s += "<br>You want to pay for: " + $("#pay").find("option:selected").text();
-            s += "<br>Your picture: " + $("#pic").val();
-            $("#info").html(s);
+        function postAjax() {
+            $.post("lab3_2.asp",
+                    {
+                        name: $("#fname").val() + " " + $("#lname").val(),
+                        email: $("#email").val(),
+                        address: $("#address").val(),
+                        sex: $('input[name="sex"]:checked').val(),
+                        birthDate: $("#bdate").val(),
+                        jobSelect: $("#job").find("option:selected").text(),
+                        timeSelect: $("#pay").find("option:selected").text(),
+                        picture: $("#picture").val()
+                    },
+                    function (data) {
+                        $("#info").html(data);
+                    });
         }
     </script>
 </head>
 <body onload="changeJob(STUDENT)">
-<form action="javascript:showInfo()">
+<form action="javascript:postAjax()" method="post">
     <div id="form">
         <h3>Please fill in the following information</h3>
         <table>
@@ -92,8 +97,8 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="pic">Picture (4x6)*</label></td>
-                <td><input type="file" name="pic" id="pic" value="" placeholder="" required></td>
+                <td><label for="picture">Picture (4x6)*</label></td>
+                <td><input type="file" name="picture" id="picture" value="" placeholder="" required></td>
             </tr>
             <tr>
                 <td><input type="submit" name="review" value="Review"></td>
