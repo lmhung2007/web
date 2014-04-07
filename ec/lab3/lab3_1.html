@@ -1,93 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lab3_1</title>
-	<link rel="stylesheet" type="text/css" href="lab3_1.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript">
-	function showInfo() {
-		var s = "Name: " + $("#fname").val() + " " + $("#lname").val();
-		s += "<br>Email: " + $("#email").val();
-		s += "<br>Address: " + $("#address").val();
-		s += "<br>Sex: " + $('input[name="sex"]:checked').val();
-		s += "<br>Birth date: " + $("#bdate").val();
-		s += "<br>Job: " + $("#job option:selected").text();
-		s += "<br>You want to pay for: " + $("#pay option:selected").text();
-		s += "<br>Your picture: " + $("#pic").val().split("\\").pop();
-		$("#info").html(s);
-	}
-	</script>
+    <title>Lab3_1</title>
+    <link rel="stylesheet" type="text/css" href="lab3_1.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        var STUDENT = "Student";
+        var jobs = [STUDENT, "Lecturer", "Other"];
+        var students = ["1 semester", "1 year"];
+        var others = ["1 year", "2 years"];
+        function changeJob() {
+            var jobName = $(job).val();
+            $(pay).empty();
+            var arr = (jobName == STUDENT ? students : others);
+            $.each(arr, function (value, key) {
+                $(pay).append($("<option/>", {
+                    value: key,
+                    text: key
+                }));
+            });
+        }
+        function showInfo() {
+            var s = "Name: " + $("#fname").val() + " " + $("#lname").val();
+            s += "<br>Email: " + $("#email").val();
+            s += "<br>Address: " + $("#address").val();
+            s += "<br>Sex: " + $('input[name="sex"]:checked').val();
+            s += "<br>Birth date: " + $("#bdate").val();
+            s += "<br>Job: " + $("#job").find("option:selected").text();
+            s += "<br>You want to pay for: " + $("#pay").find("option:selected").text();
+            s += "<br>Your picture: " + $("#pic").val().split("\\").pop();
+            $("#info").html(s);
+        }
+    </script>
 </head>
-<body>
-	<form action="javascript:showInfo()">
-		<div id="form">
-			<h3>Please fill in the following information</h3>
-			<table>
-				<tr>
-					<td><label for="lname">Last Name*</label></td>
-					<td>
-						<input type="text" name="lname" id="lname" value="Lê" placeholder="Last name" required>
-						<label for="fname">First Name*</label>
-						<input type="text" name="fname" id="fname" value="Hưng" placeholder="First name" required>
-					</td>
-				</tr>
-				<tr>
-					<td><label for="email">Email*</label></td>
-					<td><input type="email" name="email" id="email" value="hungle.info@gmail.com" placeholder="example@abc.com" required></td>
-				</tr>
-				<tr>
-					<td><label for="address">Address</label></td>
-					<td><textarea name="address" id="address" cols="46">Nơi tôi sinh ra</textarea></td>
-				</tr>
-				<tr>
-					<td><label for="sex">Sex</label></td>
-					<td>
-						<input type="radio" name="sex" id="man" value="Man" placeholder="" checked="checked">
-						<label for="man">Man</label>
-						<input type="radio" name="sex" id="woman" value="Woman" placeholder="">
-						<label for="woman">Woman</label>
-						<input type="radio" name="sex" id="gay" value="Gay" placeholder="">
-						<label for="gay">Gay</label>
-						<input type="radio" name="sex" id="les" value="Les" placeholder="">
-						<label for="les">Les</label>
-					</td>
-				</tr>
-				<tr>
-					<td><label for="bdate">Birth date</label></td>
-					<td><input type="date" name="bdate" id="bdate" value="" placeholder=""></td>
-				</tr>
-				<tr>
-					<td><label for="job">Job*</label></td>
-					<td>
-						<select id="job">
-							<option value="Student">Student</option>
-							<option value="Lecturer">Lecturer</option>
-							<option value="Other">Other</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><label for="pay">You want to pay for*</label></td>
-					<td>
-						<select id="pay">
-							<option value="">1 semester</option>
-							<option value="">1 year</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><label for="pic">Picture (4x6)*</label></td>
-					<td><input type="file" name="pic" id="pic" value="" placeholder="" required></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="review" value="Review"></td>
-				</tr>
-			</table>
-		</div>
-		<div id="show">
-			<h3>Here is your information after click Review</h3>
-			<div id="info"></div>
-		</div>
-	</form>
+<body onload="changeJob(STUDENT)">
+<form action="javascript:showInfo()">
+    <div id="form">
+        <h3>Please fill in the following information</h3>
+        <table>
+            <tr>
+                <td><label for="lname">Last Name*</label></td>
+                <td>
+                    <input type="text" name="lname" id="lname" value="Lê" placeholder="Last name" required>
+                    <label for="fname">First Name*</label>
+                    <input type="text" name="fname" id="fname" value="Hưng" placeholder="First name" required>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="email">Email*</label></td>
+                <td><input type="email" name="email" id="email" value="hungle.info@gmail.com"
+                           placeholder="example@abc.com" required></td>
+            </tr>
+            <tr>
+                <td><label for="address">Address</label></td>
+                <td><textarea name="address" id="address" cols="46">Nơi tôi sinh ra</textarea></td>
+            </tr>
+            <tr>
+                <td><label>Sex</label></td>
+                <td>
+                    <input type="radio" name="sex" id="man" value="Man" placeholder="" checked="checked">
+                    <label for="man">Man</label>
+                    <input type="radio" name="sex" id="woman" value="Woman" placeholder="">
+                    <label for="woman">Woman</label>
+                    <input type="radio" name="sex" id="gay" value="Gay" placeholder="">
+                    <label for="gay">Gay</label>
+                    <input type="radio" name="sex" id="les" value="Les" placeholder="">
+                    <label for="les">Les</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="bdate">Birth date</label></td>
+                <td><input type="date" name="bdate" id="bdate" value="" placeholder=""></td>
+            </tr>
+            <tr>
+                <td><label for="job">Job*</label></td>
+                <td>
+                    <select id="job" onchange="changeJob()">
+                        <script>
+                            for (var i = 0; i < jobs.length; ++i) {
+                                document.write('<option value="' + jobs[i] + '">' + jobs[i] + '</option>');
+                            }
+                        </script>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="pay">You want to pay for*</label></td>
+                <td>
+                    <select id="pay">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="pic">Picture (4x6)*</label></td>
+                <td><input type="file" name="pic" id="pic" value="" placeholder="" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="review" value="Review"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="show">
+        <h3>Here is your information after click Review</h3>
+
+        <div id="info"></div>
+    </div>
+</form>
 </body>
 </html>
