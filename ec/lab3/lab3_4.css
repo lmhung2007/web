@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h2, h3 {
+    font-family: cursive;
+}
+
+button {
+    padding: 2px;
+}
+
+#wrap {
+    margin: 100px auto;
+    padding: 10px;
+    border: 1px solid #52bde2;
+    width: 885px;
+    height: 555px;
+}
+
+#left {
+    width: 530px;
+    float: left;
+}
+
+#left h2 {
+    color: #993333;
+    margin-left: 10px;
+    height: 40px;
+}
+
+#right {
+    width: 250px;
+    float: left;
+}
+
+#right h3 {
+    color: forestgreen;
+    margin-right: 20px;
+    height: 40px;
+}
+
+#shirt {
+    width: 524px;
+    height: 506px;
+    border: 2px dashed #edb04d;
+    background: lightyellow url("mens-tshirt-front_1_3.png");
+}
+
+#shirt #frame {
+    border: 1px dotted #27470e;
+    margin-left: 110px;
+    margin-top: 35px;
+    width: 300px;
+    height: 460px;
+}
+
+#shirt #textframe {
+    font-family: cursive;
+    font-size: 24pt;
+    color: #ff0000;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+#shirt #picframe {
+    height: 300px;
+    background-repeat: no-repeat;
+}
+
+#panel {
+    width: 300px;
+    height: 456px;
+    border: 2px dashed #edb04d;
+    background-color: lavenderblush;
+    padding: 25px;
+}
+
+#command {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    display: none;
+}
+
+#command button {
+    padding: 2px 15px;
+}
+
+#choosecolor {
+    display: none;
+}
+
+#textpanel {
+    /*display: none;*/
+}
+
+#textpanel textarea {
+    display: inline;
+    width: 300px;
+}
+
+.ok {
+    margin-left: 200px;
+    width: 100px;
+}
+
+.colorbutton {
+    width: 20px;
+    height: 20px;
+    display: inline;
+    margin: 5px 8px;
+}
+
+#picpanel {
+    /*display: none;*/
+}
+
+#choosemargin {
+    display: none;
+}
+
+#choosemargin input[type=text] {
+    width: 25px;
+    margin: 0 5px;
+}

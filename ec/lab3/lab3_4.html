@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab3_4</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="lab3_4.css">
+    <script type="text/javascript">
+        function begin() {
+            $("#begin").hide();
+            $("#command").show();
+            $("#frame").css("border-style", "none");
+            $("#textframe").html("");
+        }
+        function show(control) {
+            $(control).css("display", "block");
+        }
+        function addText() {
+            var s = $(text).val();
+            $("#textframe").html(s);
+            show("#choosecolor");
+        }
+        function changeColor(color) {
+            $("#textframe").css("color", color);
+        }
+        function addPicture() {
+            var filename = $("#choosefile").val().split("\\").pop();
+            console.log(filename);
+            $("#picframe").css("background-image", 'url(' + filename + ')');
+            show("#choosemargin");
+        }
+        function changeMarginLeft() {
+            $("#picframe").css("margin-left", parseInt($("#marginleft").val()));
+        }
+        function changeMarginTop() {
+            $("#picframe").css("margin-top", parseInt($("#margintop").val()));
+        }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <div id="left">
+        <h2>Design your T-shirt</h2>
+
+        <div id="shirt">
+            <div id="frame">
+                <div id="textframe">
+                    This<br>is<br>area<br>for<br>your<br>designation
+                </div>
+                <div id="picframe">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right">
+        <h3>Choose your style</h3>
+
+        <div id="panel">
+            <a id="begin" href="#" onclick="begin()">Begin to design...</a>
+
+            <div id="command">
+                <button id="addText" onclick='show("#textpanel");'>Add text</button>
+                <button id="addPic" onclick='show("#picpanel");'>Add picture</button>
+            </div>
+            <div id="textpanel">
+                <textarea id="text" placeholder="Your text">~o0 Your style 0o~ Your character</textarea>
+                <br>
+                <button class="ok" onclick="addText();">OK</button>
+                <div id="choosecolor">
+                    <p><label>Basic color</label></p>
+                    <script>
+                        var colors = ["#f00", "#ff0", "#0f0", "#00f"];
+                        for (var i = 0; i < colors.length; ++i) {
+                            document.write('<button class="colorbutton" style="background-color:'
+                                    + colors[i] + ';" id="' + colors[i] + '"></button>');
+                        }
+                        $(".colorbutton").click(function () {
+                            changeColor(this.id);
+                        });
+                    </script>
+                    <p><label for="morecolor">And more...</label></p>
+                    <input id="morecolor" type="color" onchange="changeColor(this.value);">
+                </div>
+            </div>
+            <div id="picpanel">
+                <label for="choosefile">Choose a file:</label>
+                <input type="file" id="choosefile" value="Choose File">
+                <br>
+                <button class="ok" onclick="addPicture();">OK</button>
+                <div id="choosemargin">
+                    <p>
+                        <label for="margintop">Top:</label>
+                        <input type="text" id="margintop" value="0" onchange="changeMarginTop();">px;
+                    </p>
+
+                    <p>
+                        <label for="marginleft">Left:</label>
+                        <input type="text" id="marginleft" value="0" onchange="changeMarginLeft();">px;
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
