@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    margin: 50px auto;
+    width: 400px;
+    text-align: center;
+}
+
+#box {
+    background-color: #ffffad;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+}
+
+#pic {
+    margin: 160px 0 0 160px;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    background-image: url("cat/grey-cat-001.gif");
+}

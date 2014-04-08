@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab3_3</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="lab3_3.css">
+    <script type="text/javascript">
+        function boxOut() {
+            $("#pic").css("background-image", 'url("cat/grey-cat-001.gif")');
+        }
+        function boxIn() {
+            $("#pic").css("background-image", 'url("cat/grey-cat-007.gif")');
+        }
+        function boxDown() {
+            $("#pic").css("background-image", 'url("cat/cat3_small.gif")');
+        }
+        var W = 80, H = 80;
+        function hover(e) {
+            var pic = $('#pic');
+            var sx = e.offsetX + parseInt(pic.css("margin-left"));
+            var sy = e.offsetY + parseInt(pic.css("margin-top"));
+//            console.log(sx + " " + (sx + W) + " " + sy + " " + (sy + H));
+            do {
+                var x = parseInt(Math.random() * 300);
+                var y = parseInt(Math.random() * 300);
+//                console.log(x + " " + y);
+            } while ((sx >= x && sx <= x + W) || (sy >= y && sy <= y + H));
+            pic.css("margin-left", x);
+            pic.css("margin-top", y);
+        }
+        $(document).ready(function () {
+            $('#pic').mouseenter(function (e) {
+                hover(e);
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="wrapper">
+    <h1>Catch me if you can!</h1>
+
+    <div id="box" onmouseout="boxOut();" onmouseover="boxIn();" onmousedown="boxDown();" onmouseup="boxIn();">
+        <div id="pic"></div>
+    </div>
+</div>
+</body>
+
+</html>
