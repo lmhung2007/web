@@ -94,7 +94,7 @@ button {
 }
 
 #textpanel {
-    /*display: none;*/
+    display: none;
 }
 
 #textpanel textarea {
@@ -115,7 +115,7 @@ button {
 }
 
 #picpanel {
-    /*display: none;*/
+    display: none;
 }
 
 #choosemargin {
