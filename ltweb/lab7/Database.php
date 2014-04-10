@@ -30,12 +30,15 @@ class Database
 
     public function get_all_cars()
     {
-        $query = "SELECT id, name, year FROM $this->table";
+        $query = "SELECT id, name, year FROM " . mysql_real_escape_string($this->table);
         $result = mysql_query($query);
         $data = array();
         while ($row = mysql_fetch_assoc($result)) {
-            $data[] = json_encode($row).PHP_EOL;
+            $data[] = json_encode($row);
         }
         return $data;
     }
 }
+
+$db = new Database();
+$db->get_all_cars();

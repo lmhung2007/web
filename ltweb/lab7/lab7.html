@@ -4,25 +4,6 @@
     <title>Lab7</title>
     <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
     <script src="lab7.js"></script>
-    <script type="text/javascript">
-        function list_all_cars() {
-            $.post("lab7.php",
-                    {
-                        type: "listing"
-                    },
-                    function (response) {
-                        var cars = JSON.parse(response);
-                        var html = '<table border="1">';
-                        html += '<tr><td>Id</td><td>Name</td><td>Year</td></tr>';
-                        for (var i = 0; i < cars.length; ++i) {
-                            var car = JSON.parse(cars[i]);
-                            html += '<tr><td>' + car.id + '</td><td>' + car.name + '</td><td>' + car.year + '</td></tr>';
-                        }
-                        html += '</table>';
-                        $("#result").html(html);
-                    }
-            );
-        }</script>
 </head>
 <body>
 <button onclick="list_all_cars();">Show Result</button>
