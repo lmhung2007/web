@@ -8,8 +8,6 @@
 
 require_once("Database.php");
 
-//header("Content-Type: application/json");
-
 if (!isset($_POST['type'])) {
     die;
 }
@@ -25,6 +23,6 @@ switch ($type) {
 
 function get_all_cars()
 {
-    $db = new CarManager();
+    $db = new Database();
     return json_encode($db->get_all_cars());
 }
