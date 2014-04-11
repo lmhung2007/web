@@ -12,7 +12,7 @@ function display_result() {
     for (var i = 0; i < cars.length; ++i) {
         var car = cars[i];
         html += '<tr id="car' + car.id + '"><td>' + car.id + '</td><td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
-        html += '<td><button>Edit</button></td>';
+        html += '<td><button onclick="edit_car(' + car.id + ')";>Edit</button></td>';
         html += '<td><button onclick="delete_car(' + car.id + ');">Delete</button></td>';
         html += '</tr>';
     }
@@ -52,4 +52,14 @@ function delete_car(car_id) {
             }
         );
     }
+}
+
+function edit_car(car_id) {
+    var car = cars[50];
+    var html = "";
+    html += '<tr id="car' + car.id + '"><td>' + car.id + '</td><td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
+    html += '<td><button onclick="edit_car(' + car.id + ')";>Edit</button></td>';
+    html += '<td><button onclick="delete_car(' + car.id + ');">Delete</button></td>';
+    html += '</tr>';
+    $("#list > table > tbody > tr#car" + car_id).after(html);
 }
