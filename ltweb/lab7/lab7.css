@@ -1,0 +1,32 @@
+table {
+    margin: 100px auto;
+    border: 1px solid black;
+    border-spacing: 0;
+    font-family: "lucida console";
+    font-size: 90%;
+}
+
+thead td {
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #75715e;
+    border: 1px solid black;
+    padding: 10px 20px;
+}
+
+tbody td {
+    padding: 3px 20px;
+    text-align: center;
+}
+
+tbody td[class=cname] {
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+tbody button {
+    width: 60px;
+}

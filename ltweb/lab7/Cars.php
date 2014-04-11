@@ -6,7 +6,7 @@
  * Date: 4/11/14
  * Time: 12:10 AM
  */
-class Database
+class Cars
 {
     public $host = "localhost";
     public $username = "root";
@@ -15,6 +15,7 @@ class Database
     public $table = "cars";
 
     private $db_handle;
+    private $mysqli;
 
     public function __construct()
     {
@@ -23,22 +24,27 @@ class Database
 
     public function connect()
     {
-        $this->db_handle = mysql_connect($this->host, $this->username, $this->password)
+        $this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->database)
         or die("Unable to connect to MySQL");
-        mysql_select_db($this->database, $this->db_handle);
     }
 
     public function get_all_cars()
     {
-        $query = "SELECT id, name, year FROM " . mysql_real_escape_string($this->table);
-        $result = mysql_query($query);
+        $query = "SELECT id, name, year FROM " . $this->table;
+        $result = mysqli_query($this->mysqli, $query);
         $data = array();
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = $result->fetch_assoc()) {
             $data[] = json_encode($row);
         }
         return $data;
     }
+
+    public function delete_car($car_id)
+    {
+        $query = "DELETE FROM " . $this->table . " WHERE id = " . $car_id;
+        mysqli_query($this->mysqli, $query);
+    }
 }
 
-$db = new Database();
+$db = new Cars();
 $db->get_all_cars();
