@@ -27,11 +27,7 @@ function list_all_cars() {
             type: "listing"
         },
         function (response) {
-            var items = JSON.parse(response);
-            cars = Array();
-            for (var i = 0; i < items.length; ++i) {
-                cars[i] = JSON.parse(items[i]);
-            }
+            cars = JSON.parse(response);
             display_result();
         }
     );

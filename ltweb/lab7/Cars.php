@@ -34,7 +34,7 @@ class Cars
         $result = mysqli_query($this->mysqli, $query);
         $data = array();
         while ($row = $result->fetch_assoc()) {
-            $data[] = json_encode($row);
+            $data[] = $row;
         }
         return $data;
     }
