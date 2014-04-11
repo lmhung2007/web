@@ -3,22 +3,29 @@
  */
 
 var cars;
+var prev_car_id = "";
+var row_edit;
 
 function display_result() {
-    var html = '<table border="1">';
+    var html = '<table border="0">';
     html += '<thead><tr><td>Id</td><td>Name</td><td>Year</td>';
     html += '<td>Modify</td><td>Delete</td>';
     html += '</tr></thead><tbody>';
+    html += '<tr id="row_edit"><td class="col_edit"><input type="text" placeholder="Id"></td>';
+    html += '<td class="col_edit cname"><input type="text" placeholder="Name"></td></tr>';
     for (var i = 0; i < cars.length; ++i) {
         var car = cars[i];
-        html += '<tr id="car' + car.id + '"><td>' + car.id + '</td><td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
-        html += '<td><button onclick="edit_car(' + car.id + ')";>Edit</button></td>';
-        html += '<td><button onclick="delete_car(' + car.id + ');">Delete</button></td>';
+        html += '<tr id="car' + car.id + '" ><td class="car_id">' + car.id + '</td>';
+        html += '<td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
+        html += '<td><a onclick="edit_car(\'' + car.id + '\')";>Edit</a></td>';
+        html += '<td><a onclick="delete_car(\'' + car.id + '\');">Delete</a></td>';
         html += '</tr>';
     }
     html += '</tbody>';
     html += '</table>';
     $("#list").html(html);
+    row_edit = $("#row_edit");
+    row_edit.hide();
 }
 
 function list_all_cars() {
@@ -42,11 +49,10 @@ function delete_car(car_id) {
                 car_id: car_id
             },
             function (response) {
-                for (var i = 0; i < cars.length; ++i) {
-                    if (cars[i].id === car_id.toString()) {
+                for (var i = cars.length - 1; i >= 0; --i) {
+                    if (cars[i].id === car_id) {
                         cars.splice(i, 1);
                         $("#car" + car_id).remove();
-                        break;
                     }
                 }
             }
@@ -55,11 +61,12 @@ function delete_car(car_id) {
 }
 
 function edit_car(car_id) {
-    var car = cars[50];
-    var html = "";
-    html += '<tr id="car' + car.id + '"><td>' + car.id + '</td><td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
-    html += '<td><button onclick="edit_car(' + car.id + ')";>Edit</button></td>';
-    html += '<td><button onclick="delete_car(' + car.id + ');">Delete</button></td>';
-    html += '</tr>';
-    $("#list > table > tbody > tr#car" + car_id).after(html);
+    var row = $("#list > table > tbody > tr#car" + car_id);
+    if (prev_car_id != "") {
+        $("#list > table > tbody > tr#car" + prev_car_id).show();
+    }
+    prev_car_id = car_id;
+    row.after(row_edit);
+    row.hide();
+    row_edit.show();
 }
