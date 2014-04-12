@@ -1,70 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 table {
     margin: 100px auto;
     border: 1px solid black;
     border-spacing: 0;
-    font-family: "lucida console";
+    font-family: "lucida console", Courier, sans-serif;
     font-size: 90%;
     text-align: center;
 }
 
-table input[type=text] {
+table input[type=text], table select {
     width: 100%;
     margin: 0;
-    padding: 5px 15px;
+    padding: 4px 15px;
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     text-align: inherit;
     background-color: inherit;
 }
 
-thead {
-    text-align: center;
+tbody tr:not(.row_edit) td {
+    padding: 2px 15px;
+}
+
+table td:nth-of-type(1) {
+    width: 30px;
+}
+
+table td:nth-of-type(2) {
+    width: 300px;
+    text-align: left;
+}
+
+table td:nth-of-type(3) {
+    width: 60px;
+}
+
+tbody tr:not(.row_edit) td:nth-of-type(4),
+tbody tr:not(.row_edit) td:nth-of-type(5) {
+    width: 90px;
+    margin: 1px 2px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+table select {
+    padding-right: 0;
+    padding-left: 25px;
 }
 
 thead td {
     font-weight: bold;
     color: #ffffff;
     background-color: #75715e;
-    /*border: 1px solid black;*/
     padding: 10px 15px;
 }
 
-tbody tr:not(#row_edit):hover {
+tbody tr:not(.row_edit):hover {
     color: greenyellow;
     background-color: #75715E;
 }
 
-tbody td:not(.col_edit) {
-    padding: 3px 15px;
-    text-align: center;
-}
-
-tbody td[class=cname] {
-    text-align: left;
-}
-
-tr:nth-child(even) {
+tbody tr:nth-child(even) {
     background-color: #f0f0f0;
 }
 
-tbody a {
+tbody a, .row_edit button {
     cursor: pointer;
     display: block;
-    padding: 5px;
-    width: 60px;
+    margin: 1px;
+    padding: 3px 0;
 }
 
 tbody a:hover {
-    color: #0000ff;
-    background-color: #ffffff;
+    color: #75715E;
+    background-color: greenyellow;
 }
 
-td.car_id {
-    width: 30px;
+.row_edit td * {
+    font-family: "lucida console";
 }
 
-#row_edit {
-}
-
-#row_edit td {
-    padding: 2px;
+.row_edit button {
+    display: block;
+    width: 98%;
+    margin: 1px;
 }

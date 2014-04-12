@@ -3,7 +3,7 @@
  */
 
 var cars;
-var prev_car_id = "";
+var prev_row = null;
 var row_edit;
 
 function display_result() {
@@ -11,20 +11,28 @@ function display_result() {
     html += '<thead><tr><td>Id</td><td>Name</td><td>Year</td>';
     html += '<td>Modify</td><td>Delete</td>';
     html += '</tr></thead><tbody>';
-    html += '<tr id="row_edit"><td class="col_edit"><input type="text" placeholder="Id"></td>';
-    html += '<td class="col_edit cname"><input type="text" placeholder="Name"></td></tr>';
-    for (var i = 0; i < cars.length; ++i) {
+    html += '</tr><tr class="row_edit" style="display: none;"><td></td></tr>';
+    html += '<tr class="row_edit"><td class="col_edit"><input id="id" type="text" placeholder="Id"></td>';
+    html += '<td class="col_edit"><input id="name" type="text" placeholder="Name"></td>';
+    html += '<td><select id="year">';
+    for (var i = 1990; i <= 2013; ++i) {
+        html += '<option value="' + i + '">' + i + '</option>';
+    }
+    html += '</select></td><td><button>Update</button></td>';
+    html += '<td><button>Cancel</button></td>';
+    html += '</tr>';
+    for (i = 0; i < cars.length; ++i) {
         var car = cars[i];
         html += '<tr id="car' + car.id + '" ><td class="car_id">' + car.id + '</td>';
-        html += '<td class="cname">' + car.name + '</td><td>' + car.year + '</td>';
-        html += '<td><a onclick="edit_car(\'' + car.id + '\')";>Edit</a></td>';
-        html += '<td><a onclick="delete_car(\'' + car.id + '\');">Delete</a></td>';
+        html += '<td class="car_name">' + car.name + '</td><td class="car_year">' + car.year + '</td>';
+        html += '<td><a onclick="edit_car(this.parentNode.parentNode)";>Edit</a></td>';
+        html += '<td><a onclick="delete_car(this.parentNode.parentNode);">Delete</a></td>';
         html += '</tr>';
     }
     html += '</tbody>';
     html += '</table>';
     $("#list").html(html);
-    row_edit = $("#row_edit");
+    row_edit = $(".row_edit");
     row_edit.hide();
 }
 
@@ -40,7 +48,9 @@ function list_all_cars() {
     );
 }
 
-function delete_car(car_id) {
+function delete_car(row) {
+    var car_id = $(row).find(".car_id").text();
+    console.log(row.rowIndex);
     var r = confirm("Delete this car?");
     if (r === true) {
         $.post("lab7.php",
@@ -52,21 +62,26 @@ function delete_car(car_id) {
                 for (var i = cars.length - 1; i >= 0; --i) {
                     if (cars[i].id === car_id) {
                         cars.splice(i, 1);
-                        $("#car" + car_id).remove();
                     }
                 }
+                row.remove();
             }
         );
     }
 }
 
-function edit_car(car_id) {
-    var row = $("#list > table > tbody > tr#car" + car_id);
-    if (prev_car_id != "") {
-        $("#list > table > tbody > tr#car" + prev_car_id).show();
+function edit_car(row) {
+    if (prev_row !== null) {
+        $(prev_row).show();
     }
-    prev_car_id = car_id;
-    row.after(row_edit);
-    row.hide();
+    prev_row = row;
+    row_edit.find("#id").val($(row).find(".car_id").text());
+    row_edit.find("#name").val($(row).find(".car_name").text());
+    console.log($(row).find(".car_year").text());
+    row_edit.find("#year").val($(row).find(".car_year").text());
+    $(row).after(row_edit);
+    $(row).hide();
     row_edit.show();
+    row_edit.find("#id").focus();
+    row_edit.find("#id").select();
 }
