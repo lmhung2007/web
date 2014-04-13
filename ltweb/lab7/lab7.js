@@ -75,9 +75,8 @@ function get_index(car_id) {
 }
 
 function delete_car(row) {
-    console.log(row);
-    var car_id = $(row).find(".car_id").text();
-    console.log(row.rowIndex);
+    var car_id = $(row).find(".id").text();
+    console.log(car_id);
     var ok = confirm("Delete this car?");
     if (ok === true) {
         $.post("lab7.php",
@@ -114,8 +113,8 @@ function edit_car(row) {
     $(row).after(row_edit);
     $(row).hide();
     row_edit.show();
-    row_edit.find("#id").focus();
-    row_edit.find("#id").select();
+    row_edit.find(".id").focus();
+    row_edit.find(".id").select();
 }
 
 function update_car(row) {
