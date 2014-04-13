@@ -3,11 +3,65 @@
 <head>
     <title>Lab7</title>
     <link href="lab7.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script src="jquery-1.11.0.min.js"></script>
     <script src="lab7.js"></script>
 </head>
-<body onload="list_all_cars();">
+<body>
 <div id="list">
+    <a href="#" onclick="list_all_cars();">Click here to refresh list</a><br><br>
+    <table>
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Year</td>
+            <td>Modify</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row-edit" style="display: none;">
+            <td></td>
+        </tr>
+        <tr class="row-edit" style="display: none">
+            <script>document.writeln(gen_edit_row());</script>
+            <td>
+                <button class="btn-update">Update</button>
+            </td>
+            <td>
+                <button class="btn-cancel">Cancel</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="row-add">
+            <script>document.writeln(gen_edit_row());</script>
+            <td>
+                <button class="btn-add">Add</button>
+            </td>
+            <td>
+                <button class="btn-reset">Reset</button>
+            </td>
+        </tr>
+        </tfoot>
+        <script>
+            $(".btn-update").click(function () {
+                update_car(this.parentNode.parentNode);
+            });
+            $(".btn-cancel").click(function () {
+                cancel(this.parentNode.parentNode);
+            });
+            $(".btn-add").click(function () {
+                add_car(this.parentNode.parentNode);
+            });
+            $(".btn-reset").click(function () {
+                reset(this.parentNode.parentNode);
+            });
+        </script>
+    </table>
+    <script>
+        list_all_cars();
+    </script>
 </div>
 </body>
 </html>

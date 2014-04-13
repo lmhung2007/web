@@ -8,43 +8,103 @@
  */
 class Cars
 {
-    public $host = "localhost";
-    public $username = "root";
-    public $password = "";
-    public $database = "examples";
-    public $table = "cars";
+    public static $host = "localhost";
+    public static $username = "root";
+    public static $password = "";
+    public static $database = "examples";
+    public static $table = "cars";
 
-    private $db_handle;
-    private $mysqli;
-
-    public function __construct()
+    private static function encode_data($data)
     {
-        $this->connect();
+        return array("data" => $data, "success" => true);
     }
 
-    public function connect()
+    private static function encode_error($error)
     {
-        $this->mysqli = new mysqli($this->host, $this->username, $this->password, $this->database)
-        or die("Unable to connect to MySQL");
+        return array("error" => $error, "success" => false);
     }
 
-    public function get_all_cars()
+    private static function execute($query)
     {
-        $query = "SELECT id, name, year FROM " . $this->table;
-        $result = mysqli_query($this->mysqli, $query);
-        $data = array();
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
+        $mysqli = @mysqli_connect(self::$host, self::$username, self::$password, self::$database);
+        if (!$mysqli) {
+            return self::encode_error(mysqli_connect_error());
         }
-        return $data;
+        if ($data = $mysqli->query($query)) {
+            return self::encode_data($data);
+        } else {
+            return self::encode_error($mysqli->error);
+        }
     }
 
-    public function delete_car($car_id)
+    public static function get_all_cars()
     {
-        $query = "DELETE FROM " . $this->table . " WHERE id = " . $car_id;
-        mysqli_query($this->mysqli, $query);
+        $query = "SELECT id, name, year FROM " . self::$table;
+        $result = self::execute($query);
+        if ($result['success']) {
+            $data = array();
+            $cursor = $result['data'];
+            while ($row = $cursor->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return self::encode_data($data);
+        } else {
+            return $result;
+        }
+    }
+
+    public static function delete_car($id)
+    {
+        $id = addslashes($id);
+        $query = "DELETE FROM " . self::$table . " WHERE id = " . $id;
+        return self::execute($query);
+    }
+
+    private static function check_valid($id, $name, $year)
+    {
+        if (!is_numeric($id)) {
+            return "id must be a number";
+        }
+        if (strlen($name) < 5 || strlen($name) > 40) {
+            return "name must be 5-40 characters in length";
+        }
+        if (!is_numeric($year)) {
+            return "year must be a number";
+        }
+        if ((int) $year < 1990 || (int) $year > 2013) {
+            return "year must be between 1990 and 2013";
+        }
+        return null;
+    }
+
+    public static function update_car($old_id, $id, $name, $year)
+    {
+        $year = addslashes($year);
+        $name = addslashes($name);
+        $id = addslashes($id);
+        $old_id = addslashes($old_id);
+        if ($err = self::check_valid($id, $name, $year)) {
+            return self::encode_error($err);
+        }
+        $query = "UPDATE " . self::$table . " SET id = $id, name = '$name', year = '$year' WHERE id = " . $old_id;
+        return self::execute($query);
+    }
+
+    public static function insert_car($id, $name, $year)
+    {
+        $year = addslashes($year);
+        $name = addslashes($name);
+        $id = addslashes($id);
+        if ($err = self::check_valid($id, $name, $year)) {
+            return self::encode_error($err);
+        }
+        $query = "INSERT INTO " . self::$table . " VALUES ($id, '$name', '$year')";
+        return self::execute($query);
     }
 }
 
-$db = new Cars();
-$db->get_all_cars();
+//var_dump(Cars::insert_car(0, "Hưng Lê", 1991));
+//var_dump(Cars::get_all_cars());
+//CArs::get_all_cars();
+//var_dump(Cars::delete_car(1000));
+//var_dump(Cars::update_car(200, "Hưng ' Lê", 1991));

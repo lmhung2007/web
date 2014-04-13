@@ -3,12 +3,17 @@
     padding: 0;
 }
 
-table {
-    margin: 100px auto;
-    border: 1px solid black;
-    border-spacing: 0;
+#list {
     font-family: "lucida console", Courier, sans-serif;
     font-size: 90%;
+    margin: 50px auto;
+    width: 700px;
+}
+
+table {
+    width: 700px;
+    border: 1px solid black;
+    border-spacing: 0;
     text-align: center;
 }
 
@@ -23,7 +28,7 @@ table input[type=text], table select {
     background-color: inherit;
 }
 
-tbody tr:not(.row_edit) td {
+tbody tr:not(.row-edit) td {
     padding: 2px 15px;
 }
 
@@ -40,8 +45,8 @@ table td:nth-of-type(3) {
     width: 60px;
 }
 
-tbody tr:not(.row_edit) td:nth-of-type(4),
-tbody tr:not(.row_edit) td:nth-of-type(5) {
+tbody tr:not(.row-edit) td:nth-of-type(4),
+tbody tr:not(.row-edit) td:nth-of-type(5) {
     width: 90px;
     margin: 1px 2px;
     padding-left: 0;
@@ -60,7 +65,7 @@ thead td {
     padding: 10px 15px;
 }
 
-tbody tr:not(.row_edit):hover {
+tbody tr:not(.row-edit):hover {
     color: greenyellow;
     background-color: #75715E;
 }
@@ -69,11 +74,12 @@ tbody tr:nth-child(even) {
     background-color: #f0f0f0;
 }
 
-tbody a, .row_edit button {
+tbody a, .row-edit button, .row-add button {
     cursor: pointer;
     display: block;
     margin: 1px;
     padding: 3px 0;
+    width: 98%;
 }
 
 tbody a:hover {
@@ -81,12 +87,6 @@ tbody a:hover {
     background-color: greenyellow;
 }
 
-.row_edit td * {
+.row-edit td *, .row-add td * {
     font-family: "lucida console";
-}
-
-.row_edit button {
-    display: block;
-    width: 98%;
-    margin: 1px;
 }
