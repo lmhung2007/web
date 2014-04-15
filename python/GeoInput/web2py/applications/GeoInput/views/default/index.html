@@ -1,0 +1,25 @@
+{{extend 'layout.html'}}
+
+<div class="container centering">
+    <div class="well container">
+        <h4>Database {{=db_name}}, Collection {{=db_collection}}</h4>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Key</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{for x in cities:}}
+            <tr>
+                <td>0</td>
+                <td>key</td>
+                <td>{{=x}}</td>
+            </tr>
+            {{pass}}
+            </tbody>
+        </table>
+    </div>
+</div>
