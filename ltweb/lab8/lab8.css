@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.fit-content {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: -o-fit-content;
+}
+
+.center {
+    margin: 20px auto;
+}
+
+.container fieldset {
+    padding: 10px;
+}
+
+#command button {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+}
+
+table {
+}
+
+table td {
+    height: 25px;
+    width: 50px;
+    border: 1px solid #000000;
+    text-align: center;
+    line-height: 25px;
+}
